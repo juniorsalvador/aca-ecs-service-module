@@ -20,7 +20,16 @@ variable "service_listener" {}
 
 variable "service_task_execution_role" {}
 
-variable "service_launch_type" {}
+variable "service_launch_type" {
+  type = list(object({
+    capacity_provider = string
+    weight = number 
+  }))
+  default = [ {
+    capacity_provider = "SPOT"
+    weight = 100
+  } ]
+}
 
 variable "service_task_count" {}
 
@@ -38,6 +47,54 @@ variable "capabilities" {
   type = list(any)
 }
 
+variable "scale_type" {}
 
+variable "task_minimum" {}
 
+variable "task_maximum" {}
 
+### Autoscaling de CPU
+
+variable "scale_out_cpu_threshold" {}
+
+variable "scale_out_adjustment" {}
+
+variable "scale_out_comparison_operator" {}
+
+variable "scale_out_statistic" {}
+
+variable "scale_out_period" {}
+
+variable "scale_out_evaluation_periods" {}
+
+variable "scale_out_cooldown" {}
+
+variable "scale_in_cpu_threshold" {}
+
+variable "scale_in_adjustment" {}
+
+variable "scale_in_comparison_operator" {}
+
+variable "scale_in_statistic" {}
+
+variable "scale_in_period" {}
+
+variable "scale_in_evaluation_periods" {}
+
+variable "scale_in_cooldown" {}
+
+### Tracking CPU
+
+variable "scale_tracking_cpu" {
+  default = 80
+}
+
+### Tracking Requests
+
+variable "alb_arn" {
+  default = null
+}
+
+variable "scale_tracking_requests" {
+  default = 0
+}
