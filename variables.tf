@@ -113,4 +113,5 @@ variable "efs_volumes" {
     read_only : bool
   }))
   default = []
+  description = "Volumes para serem montados no ECS"
 }
