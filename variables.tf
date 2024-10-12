@@ -112,6 +112,15 @@ variable "efs_volumes" {
     mount_point : string
     read_only : bool
   }))
-  default = []
+  default     = []
   description = "Volumes para serem montados no ECS"
+}
+
+variable "secrets" {
+  type = list(object({
+    name : string
+    valueFrom : string
+  }))
+  description = "Lista de secrets do parameter store ou do secrets manager"
+  default     = []
 }
