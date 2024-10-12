@@ -38,14 +38,23 @@ variable "service_launch_type" {
 
 variable "service_task_count" {}
 
-variable "service_hosts" {}
+variable "service_hosts" {
+  type = list(any)
+  description = "Lista de hosts associados ao serviço, geralmente especificados para configurações DNS."
+}
 
 variable "service_healthcheck" {
   type = map(any)
+  description = "Configuração do health check do serviço"
 }
 
 variable "environment_variables" {
-  type = list(any)
+  type = list(object({
+    name : string
+    value : string
+  }))
+  description = "Lista de variavbeis de ambiente que serão passadas para o serviço"
+  default = []
 }
 
 variable "capabilities" {
@@ -112,6 +121,15 @@ variable "efs_volumes" {
     mount_point : string
     read_only : bool
   }))
-  default = []
+  default     = []
   description = "Volumes para serem montados no ECS"
+}
+
+variable "secrets" {
+  type = list(object({
+    name : string
+    valueFrom : string
+  }))
+  description = "Lista de secrets do parameter store ou do secrets manager"
+  default     = []
 }
