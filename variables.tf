@@ -39,12 +39,12 @@ variable "service_launch_type" {
 variable "service_task_count" {}
 
 variable "service_hosts" {
-  type = list(any)
+  type        = list(any)
   description = "Lista de hosts associados ao serviço, geralmente especificados para configurações DNS."
 }
 
 variable "service_healthcheck" {
-  type = map(any)
+  type        = map(any)
   description = "Configuração do health check do serviço"
 }
 
@@ -54,7 +54,7 @@ variable "environment_variables" {
     value : string
   }))
   description = "Lista de variavbeis de ambiente que serão passadas para o serviço"
-  default = []
+  default     = []
 }
 
 variable "capabilities" {
@@ -110,7 +110,8 @@ variable "alb_arn" {
 }
 
 variable "scale_tracking_requests" {
-  default = 0
+  description = "Numero alvo de solicitacoes por segundo (TPS) para o rastreamento em escala"
+  default     = 0
 }
 
 variable "efs_volumes" {
@@ -132,4 +133,9 @@ variable "secrets" {
   }))
   description = "Lista de secrets do parameter store ou do secrets manager"
   default     = []
+}
+
+variable "service_discovery_namespace" {
+  description = "Namespace ID do Service Discovery"
+  default     = null
 }
