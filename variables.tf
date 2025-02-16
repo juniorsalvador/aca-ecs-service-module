@@ -17,11 +17,46 @@ variable "private_subnets" {
 
 variable "service_port" {}
 
+variable "service_protocol" {
+  type    = string
+  default = null
+}
+
+variable "protocol" {
+  type    = string
+  default = "tcp"
+}
+
+variable "service_connect_name" {
+  type    = string
+  default = null
+}
+
+variable "use_service_connect" {
+  type    = bool
+  default = false
+}
+
+variable "service_connect_arn" {
+  type        = string
+  default     = null
+  description = "Arn do Service Connect"
+}
+
+variable "use_lb" {
+  type        = bool
+  default     = true
+  description = "Habilita a exposiçao do serviço via Load Balance"
+}
+
 variable "service_cpu" {}
 
 variable "service_memory" {}
 
-variable "service_listener" {}
+variable "service_listener" {
+  type    = string
+  default = null
+}
 
 variable "service_task_execution_role" {}
 

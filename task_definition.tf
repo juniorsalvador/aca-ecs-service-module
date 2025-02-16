@@ -36,9 +36,10 @@ resource "aws_ecs_task_definition" "main" {
 
       portMappings = [
         {
+          name          = var.service_name
           containerPort = var.service_port
           hostPort      = var.service_port
-          protocol      = "tcp"
+          protocol      = var.protocol
         }
       ]
 
@@ -48,6 +49,7 @@ resource "aws_ecs_task_definition" "main" {
           awslogs-group         = aws_cloudwatch_log_group.main.id
           awslogs-region        = var.region
           awslogs-stream-prefix = var.service_name
+          appProtocol           = var.service_protocol
         }
       }
 
